@@ -1,34 +1,39 @@
 library(googlesheets)
 library(tidyverse)
-library(ggthemes)
 library(shinythemes)
 library(DT)
 
 
+# initialize UI
 ui  <- fluidPage(
+  # select shiny theme
   theme = shinytheme('simplex'),
 
-  titlePanel('AdWords Dashboard'),
+  # set title
+  titlePanel('[Your Title]'),
 
   sidebarLayout(
 
     sidebarPanel(
-      selectInput('ws', 'Worksheet', choices = c('DailyCosts', 'MonthlyOverview', 'DailySEMData', 'SEMDataOverview'))),
+      # selector for worksheet name
+      selectInput('ws', 'Worksheet', choices = c('[Sheet 1 Name]', '[Sheet 2 Name]'))),
 
     mainPanel(
+      # datatable to render
       DT::dataTableOutput('contents')  
     )
   )
 )
 
 
+# initialize server
 server  <- function(input, output) {
 
   # authorize access to googlesheets
   gs_auth()
 
   # grab googlesheets object via URL
-  gs_data  <- gs_url('https://docs.google.com/spreadsheets/d/187bilrHYjG4wEd-07GXZ4Z6YJkILQfaEJbGfZno3PDo/edit?usp=sharing')
+  gs_data  <- gs_url('[SPREADSHEET URL]')
 
   # grab user selected worksheet
   worksheet  <- reactive({
@@ -43,10 +48,12 @@ server  <- function(input, output) {
 
     # render datatable object + settings
     DT::datatable(data,
+      # defining table style
       class = 'strive hover compact order-column',
       extensions = 'Buttons',
       options = list(
         dom = 'Bfrip',
+        # buttons for Buttons extension
         buttons = c('excel', 'pdf', 'print'),
         pageLength = 50),
       filter = 'top')
