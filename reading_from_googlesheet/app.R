@@ -1,3 +1,12 @@
+#####
+# 
+# This app.R will read data from a googlesheet
+# and render the dataframe in the mainPanel. The
+# user can switch the sheets by selecting another
+# one from the selector input in the sidebarPanel.
+#
+#####
+
 library(googlesheets)
 library(tidyverse)
 library(shinythemes)
