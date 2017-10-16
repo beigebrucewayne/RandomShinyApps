@@ -25,7 +25,7 @@ ui  <- fluidPage(
 
     sidebarPanel(
       # selector for worksheet name
-      selectInput('ws', 'Worksheet', choices = c('[Sheet 1 Name]', '[Sheet 2 Name]'))),
+      selectInput('ws', 'Worksheet', choices = c('DailyCosts', 'MonthlyOverview', 'DailySEMData', 'SEMDataOverview'))),
 
     mainPanel(
       # datatable to render
@@ -42,7 +42,7 @@ server  <- function(input, output) {
   gs_auth()
 
   # grab googlesheets object via URL
-  gs_data  <- gs_url('[SPREADSHEET URL]')
+  gs_data  <- gs_url('https://docs.google.com/spreadsheets/d/187bilrHYjG4wEd-07GXZ4Z6YJkILQfaEJbGfZno3PDo/edit?usp=sharing')
 
   # grab user selected worksheet
   worksheet  <- reactive({
